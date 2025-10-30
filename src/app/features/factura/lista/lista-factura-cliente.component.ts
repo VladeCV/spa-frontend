@@ -13,6 +13,9 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ToastModule} from "primeng/toast";
 import {ConfirmPopupModule} from "primeng/confirmpopup";
+import {AvatarModule} from "primeng/avatar";
+import {IconFieldModule} from "primeng/iconfield";
+import {FieldsetModule} from "primeng/fieldset";
 
 @Component({
   selector: 'app-lista-factura-cliente',
@@ -31,7 +34,10 @@ import {ConfirmPopupModule} from "primeng/confirmpopup";
     CurrencyPipe,
     ConfirmDialogModule,
     ToastModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    AvatarModule,
+    IconFieldModule,
+    FieldsetModule
   ],
   templateUrl: './lista-factura-cliente.component.html',
   styleUrl: './lista-factura-cliente.component.scss',
@@ -42,6 +48,7 @@ export class ListaFacturaClienteComponent implements OnInit {
   facturas!: Factura[];
   mostrarModalPago: boolean = false;
   mostrarModalDetalle: boolean = false;
+  mostrarModalConfirmacion: boolean = false;
   position: "top" | undefined;
   formPago: FormGroup = new FormGroup({});
   formValidPago: boolean = false;
@@ -73,15 +80,11 @@ export class ListaFacturaClienteComponent implements OnInit {
 
   initForm() {
     this.formPago = this.formBuilder.group({
-      f_ini: ['', {validators: [Validators.required], disabled: false}],
-      f_fin: ['', {validators: [Validators.required], disabled: false}],
-      dias_vac_apl: ['', {validators: [Validators.required], disabled: false}],
-      gestion: ['', {validators: [Validators.required], disabled: false}],
-      dias: ['', {disabled: false}],
-      meses: ['', {disabled: false}],
-      anos: ['', {disabled: false}],
-      f_presentacion: ['', {disabled: false}],
-      nro_certificado: ['', {disabled: false}]
+      nro: [{value: '', disabled: true}, Validators.required],
+      servicio: [{value: '', disabled: true}, Validators.required],
+      monto: [{value: '', disabled: true}, Validators.required],
+      f_emision: [{value: '', disabled: true}, Validators.required],
+      metodo_pago: ['', Validators.required]
     });
 
     this.formValidPago = false;
@@ -98,10 +101,6 @@ export class ListaFacturaClienteComponent implements OnInit {
     }
     this.formValidPago = true;
     return false;
-  }
-
-  verDetalle(factura: any) {
-    alert(`Detalle de la factura:\nNúmero: ${factura.numero}\nFecha: ${factura.fecha}\nMonto: ${factura.monto}`);
   }
 
   volver() {
@@ -126,31 +125,46 @@ export class ListaFacturaClienteComponent implements OnInit {
   }
 
   pagarFactura(event: { target: any }) {
-    this.confirmationService.confirm({
-      message: '¿Está seguro que desea pagar esta factura?',
-      header: 'Confirmar Pago',
-      icon: 'pi pi-exclamation-triangle',
-      target: event.target,
-      accept: () => {
-        const facturaPagada = this.facturaService.pagarFactura(this.facturaSeleccionada!.id);
-        if (facturaPagada) {
-          this.facturas = this.getFacturasByClienteId(1);
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Pago Exitoso',
-            detail: `La factura ${facturaPagada.nro} ha sido pagada correctamente.`
-          });
-          this.cerrarForm();
-        }
-      },
-      reject: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Pago Cancelado',
-          detail: 'El pago de la factura ha sido cancelado.'
-        });
+    if (this.validFormPago()) {
+      const dataSend = {
+        id: this.facturaSeleccionada?.id,
+        metodo_pago: this.formPago.get('metodo_pago')!.value
       }
-    });
+      this.confirmationService.confirm({
+        message: '¿Está seguro que desea pagar esta factura?',
+        header: 'Confirmar Pago',
+        icon: 'pi pi-exclamation-triangle',
+        target: event.target,
+        accept: () => {
+          const facturaPagada = this.facturaService.pagarFactura(dataSend);
+          console.log(facturaPagada);
+          if (facturaPagada) {
+            this.facturaSeleccionada = facturaPagada;
+            this.cerrarForm();
+            this.mostrarModalConfirmacion = true;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Pago Exitoso',
+              detail: `La factura ha sido pagada correctamente.`
+            });
+          }
+        },
+        reject: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Pago Cancelado',
+            detail: 'El pago de la factura ha sido cancelado.'
+          });
+        }
+      });
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulario Incompleto',
+        detail: 'Por favor, complete todos los campos requeridos.'
+      });
+    }
+
   }
 
   cerrarModalDetalle() {

@@ -148,12 +148,13 @@ export class FacturaService {
     return allFacturas.filter(factura => factura.cliente_id === clienteId);
   }
 
-  pagarFactura(facturaId: number) {
+  pagarFactura(data: any) {
     const allFacturas = this.getDataFactura();
-    const factura = allFacturas.find(f => f.id === facturaId);
+    const factura = allFacturas.find(f => f.id === data.id);
     if (factura && factura.estado.codigo === "PEN") {
       factura.estado = {codigo: "PAG", valor: "PAGADO"};
       factura.fecha_pago = new Date().toISOString().split('T')[0];
+      factura.metodo_pago = data.metodo_pago.label;
     }
     return factura;
   }

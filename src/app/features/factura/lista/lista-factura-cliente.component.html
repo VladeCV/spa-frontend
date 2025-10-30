@@ -51,44 +51,95 @@
 <p-confirmPopup></p-confirmPopup>
 
 <p-dialog
+  header="Header"
+  [modal]="true"
+  [(visible)]="mostrarModalConfirmacion"
+  [position]="'top'"
+  [style]="{ width: '35rem' }"
+  [draggable]="false"
+  appendTo="body">
+  <ng-template pTemplate="headless">
+    <div class="flex flex-column gap-4 p-4" style="background-color: white; border-radius: 8px;">
+      <div class="align-content-center justify-content-center text-center">
+        <div style="color: dodgerblue" class="my-5">
+          <i class="pi pi-check-circle" style="font-size: 3.5rem"></i>
+          <h2 style="margin: 0;">Pago Completado!</h2>
+        </div>
+
+        <p style="margin: 0;">La factura Nro {{ facturaSeleccionada?.nro }} ha sido pagada exitosamente.</p>
+      </div>
+      <div class="px-6">
+        <table class="w-full"
+               style="padding: 10px;  outline: lightblue outset thin;">
+          <tr>
+            <td><strong>Servicio</strong></td>
+            <td>{{ facturaSeleccionada?.servicio }}</td>
+          </tr>
+          <tr>
+            <td><strong>Monto</strong></td>
+            <td>{{ facturaSeleccionada?.monto | currency:'USD' }}</td>
+          </tr>
+          <tr>
+            <td><strong>Fecha de pago</strong></td>
+            <td>{{ facturaSeleccionada?.fecha_pago }}</td>
+          </tr>
+          <tr>
+            <td><strong>Método de Pago</strong></td>
+            <td>{{ facturaSeleccionada?.metodo_pago }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="flex justify-content-center gap-2">
+        <p-button label="OK" severity="primary" (onClick)="mostrarModalConfirmacion = false"/>
+      </div>
+    </div>
+  </ng-template>
+
+</p-dialog>
+
+
+<p-dialog
   header="Pagar factura"
   [modal]="true"
   [(visible)]="mostrarModalPago"
   [position]="'top'"
   [style]="{ width: '35rem' }"
   appendTo="body">
-  <div class="p-fluid grid form-gen mt-2">
-    <div class="field sm:col-12 lg:col-6">
-      <label>Nro Factura</label>
-      <input pInputText [value]="facturaSeleccionada?.nro" readonly/>
-    </div>
+  <form [formGroup]="formPago">
+    <div class="p-fluid grid form-gen mt-2">
+      <div class="field sm:col-12 lg:col-6">
+        <label>Nro Factura</label>
+        <input formControlName="nro" pInputText [value]="facturaSeleccionada?.nro" readonly/>
+      </div>
 
-    <div class="field sm:col-12 lg:col-6">
-      <label>Servicio</label>
-      <input pInputText [value]="facturaSeleccionada?.servicio" readonly/>
-    </div>
+      <div class="field sm:col-12 lg:col-6">
+        <label>Servicio</label>
+        <input formControlName="servicio" pInputText [value]="facturaSeleccionada?.servicio" readonly/>
+      </div>
 
-    <div class="field sm:col-12 lg:col-6">
-      <label>Monto</label>
-      <input pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly/>
-    </div>
+      <div class="field sm:col-12 lg:col-6">
+        <label>Monto</label>
+        <input formControlName="monto" pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly/>
+      </div>
 
-    <div class="field sm:col-12 lg:col-6">
-      <label>Fecha Emisión</label>
-      <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly/>
-    </div>
+      <div class="field sm:col-12 lg:col-6">
+        <label>Fecha Emisión</label>
+        <input formControlName="f_emision" pInputText [value]="facturaSeleccionada?.fecha_emision" readonly/>
+      </div>
 
-    <div class="field col-12">
-      <label>Método de pago</label>
-      <p-dropdown
-        [options]="metodosPago"
-        placeholder="Seleccione un método"
-        appendTo="body"
-
-      >
-      </p-dropdown>
+      <div class="field col-12">
+        <label>Método de pago</label>
+        <p-dropdown
+          [options]="metodosPago"
+          optionLabel="label"
+          placeholder="Seleccione un método"
+          appendTo="body"
+          formControlName="metodo_pago"
+        >
+        </p-dropdown>
+      </div>
     </div>
-  </div>
+  </form>
   <div class="flex justify-content-end gap-2">
     <p-button label="Cancelar" severity="secondary" (click)="cerrarForm()"/>
     <p-button label="Pagar" (click)="pagarFactura($event)"/>
