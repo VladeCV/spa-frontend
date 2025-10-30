@@ -16,7 +16,7 @@
         <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
         <input pInputText #search type="text" [(ngModel)]="searchValue"
-               (input)="dt1.filterGlobal(search.value, 'contains')" placeholder="Search keyword"/>
+               (input)="dt1.filterGlobal(search.value, 'contains')" placeholder="Buscar cliente"/>
         </span>
       </div>
     </ng-template>
@@ -41,7 +41,7 @@
         </th>
         <th style="min-width:15rem">
           <div class="flex align-items-center">
-            Agent
+            F. Nacimiento
             <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false"
                             [showOperator]="false" [showAddButton]="false">
               <ng-template pTemplate="header">
@@ -107,15 +107,10 @@
           {{ customer.name }}
         </td>
         <td>
-          <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-               [class]="'flag flag-' + customer.country.code" style="width: 20px"/>
-          <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
+          {{ customer.name }}
         </td>
         <td>
-          <img [alt]="customer.representative.name"
-               src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}"
-               width="32" style="vertical-align: middle"/>
-          <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
+          {{ customer.name }}
         </td>
         <td>
           {{ customer.date | date: 'MM/dd/yyyy' }}
