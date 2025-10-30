@@ -1,5 +1,5 @@
 <div class="flex flex-row-reverse flex-wrap mb-4">
-  <p-button label="Volver" [rounded]="true"  icon="pi pi-arrow-left" severity="success" (click)="volver()" />
+  <p-button label="Volver" [rounded]="true" icon="pi pi-arrow-left" severity="success" (click)="volver()"/>
 </div>
 <div class="card">
   <p-table
@@ -21,14 +21,17 @@
     <ng-template pTemplate="body" let-factura>
       <tr>
         <td>
-          <button
-            pButton
-            type="button"
-            icon="pi pi-credit-card"
-            class="p-button-rounded p-button-info p-mr-2" pTooltip="Pagar Factura"
-            tooltipPosition="top"
-            (click)="verDetalle(factura)">
-          </button>
+          <div pTooltip="{{ factura.estado.codigo === 'PAG' ? 'Ver Factura' : 'Pagar Factura' }}" tooltipPosition="top">
+            <button
+              pButton
+              type="button"
+              [icon]="factura.estado.codigo === 'PAG' ? 'pi pi-eye' : 'pi pi-credit-card'"
+              class="p-button-rounded"
+              [ngClass]="factura.estado.codigo === 'PAG' ? 'p-button-warning' : 'p-button-info'"
+              (click)="factura.estado.codigo === 'PAG' ? verFactura(factura) : showDialog(factura)"
+            >
+            </button>
+          </div>
         </td>
         <td>{{ factura.nro }}</td>
         <td>{{ factura.servicio }}</td>
@@ -41,3 +44,55 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-toast></p-toast>
+<p-confirmPopup></p-confirmPopup>
+
+<p-dialog
+  header="Pagar factura"
+  [modal]="true"
+  [(visible)]="visible"
+  [position]="'top'"
+  [style]="{ width: '35rem' }"
+  appendTo="body">
+
+
+    <div class="p-fluid grid form-gen mt-2">
+      <div class="field sm:col-12 lg:col-6">
+        <label>Nro Factura</label>
+        <input pInputText [value]="facturaSeleccionada?.nro" readonly />
+      </div>
+
+      <div class="field sm:col-12 lg:col-6">
+        <label>Servicio</label>
+        <input pInputText [value]="facturaSeleccionada?.servicio" readonly />
+      </div>
+
+      <div class="field sm:col-12 lg:col-6">
+        <label>Monto</label>
+        <input pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly />
+      </div>
+
+      <div class="field sm:col-12 lg:col-6">
+        <label>Fecha Emisión</label>
+        <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly />
+      </div>
+
+      <div class="field col-12">
+        <label>Método de pago</label>
+        <p-dropdown
+          [options]="metodosPago"
+          placeholder="Seleccione un método"
+          appendTo="body"
+
+        >
+        </p-dropdown>
+      </div>
+    </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button label="Cancelar" severity="secondary" (click)="cerrarForm()"/>
+    <p-button label="Pagar" (click)="pagarFactura($event)"/>
+  </div>
+</p-dialog>
+
+
