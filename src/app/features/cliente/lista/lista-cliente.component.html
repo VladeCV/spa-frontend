@@ -8,7 +8,7 @@
     [rowsPerPageOptions]="[10, 25, 50]"
     [loading]="loading"
     [paginator]="true"
-    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [globalFilterFields]="['nombre', 'nro', 'email_personal', 'tel_celular']"
   >
     <ng-template pTemplate="caption">
       <div class="flex">
@@ -30,31 +30,30 @@
         <th style="min-width:15rem">
           <div class="flex align-items-center">
             Nombre
-            <p-columnFilter type="text" field="name" display="menu"/>
+            <p-columnFilter type="text" field="nombre" display="menu"/>
           </div>
         </th>
         <th style="min-width:15rem">
           <div class="flex align-items-center">
             Nro. Documento
-            <p-columnFilter type="text" field="country.name" display="menu"/>
+            <p-columnFilter type="text" field="nro" display="menu"/>
           </div>
         </th>
         <th style="min-width:15rem">
           <div class="flex align-items-center">
             F. Nacimiento
-
           </div>
         </th>
         <th style="min-width:10rem">
           <div class="flex align-items-center">
             Email
-            <p-columnFilter type="date" field="date" display="menu"/>
+            <p-columnFilter type="date" field="email_personal" display="menu"/>
           </div>
         </th>
         <th style="min-width:10rem">
           <div class="flex align-items-center">
             Telf. Celular
-            <p-columnFilter type="numeric" field="balance" display="menu" currency="USD"/>
+            <p-columnFilter type="numeric" field="tel_celular" display="menu"/>
           </div>
         </th>
         <th style="min-width:10rem">

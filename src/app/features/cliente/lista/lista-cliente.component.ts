@@ -42,8 +42,6 @@ export class ListaClienteComponent implements OnInit {
 
   loading: boolean = true;
 
-  activityValues: number[] = [0, 100];
-
   searchValue: string | undefined;
 
   constructor(private clienteService: ClienteService, private router: Router) {
