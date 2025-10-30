@@ -5,7 +5,7 @@ export interface Estado {
 
 export interface Factura {
   id: number;
-  cliente_id: number;
+  cliente_id: string;
   nro: string;
   servicio: string;
   periodo: string;

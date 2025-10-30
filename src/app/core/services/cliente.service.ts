@@ -30,6 +30,18 @@ export class ClienteService {
         email_personal: 'carlos.rojas@example.com',
         estado: {codigo: 'ACT', valor: 'Activo'},
         activo: true
+      },
+      {
+        id: '1f0b4e5a-c3a4-6d2b-ad51-e0be035fb029',
+        nombre: 'Ana',
+        apellido_paterno: 'Martínez',
+        apellido_materno: 'Gómez',
+        f_nacimiento: '1985-11-23',
+        tel_celular: '+59179876543',
+        nro_documento: '6543210',
+        email_personal: 'css@gmail.com',
+        estado: {codigo: 'ACT', valor: 'Activo'},
+        activo: true
       }
     ]
   }

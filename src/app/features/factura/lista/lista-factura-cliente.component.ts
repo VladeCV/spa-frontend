@@ -16,6 +16,7 @@ import {ConfirmPopupModule} from "primeng/confirmpopup";
 import {AvatarModule} from "primeng/avatar";
 import {IconFieldModule} from "primeng/iconfield";
 import {FieldsetModule} from "primeng/fieldset";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-lista-factura-cliente',
@@ -64,16 +65,27 @@ export class ListaFacturaClienteComponent implements OnInit {
               private location: Location,
               private formBuilder: FormBuilder,
               private confirmationService: ConfirmationService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private _activatedRoute: ActivatedRoute) {
     this.initForm();
   }
 
   ngOnInit() {
-    this.facturas = this.getFacturasByClienteId(1);
+    let id_cliente: string | null = this._activatedRoute.snapshot.paramMap.get("id");
+
+    this.facturas = this.getFacturasByClienteId(id_cliente);
+
+    if (this.facturas.length === 0) {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'No hay facturas',
+        detail: 'El cliente seleccionado no tiene facturas asociadas.'
+      });
+    }
 
   }
 
-  public getFacturasByClienteId(clienteId: number): Factura[] {
+  public getFacturasByClienteId(clienteId: string | null): Factura[] {
     return this.facturaService.getFacturasByClienteId(clienteId);
 
   }

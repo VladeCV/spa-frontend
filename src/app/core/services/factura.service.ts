@@ -9,7 +9,7 @@ export class FacturaService {
     return [
       {
         id: 1,
-        cliente_id: 1,
+        cliente_id: "1f0b4e43-a106-65c4-ae51-e0be035fb029",
         nro: "FAC-0001",
         servicio: "Agua Potable",
         periodo: "2025-05",
@@ -22,7 +22,7 @@ export class FacturaService {
       },
       {
         id: 2,
-        cliente_id: 1,
+        cliente_id: "1f0b4e43-a106-65c4-ae51-e0be035fb029",
         nro: "FAC-0002",
         servicio: "Energía Eléctrica",
         periodo: "2025-06",
@@ -35,7 +35,7 @@ export class FacturaService {
       },
       {
         id: 3,
-        cliente_id: 1,
+        cliente_id: "1f0b4e43-a106-65c4-ae51-e0be035fb029",
         nro: "FAC-0003",
         servicio: "Internet Hogar",
         periodo: "2025-07",
@@ -48,7 +48,7 @@ export class FacturaService {
       },
       {
         id: 4,
-        cliente_id: 1,
+        cliente_id: "1f0b4e43-a106-65c4-ae51-e0be035fb029",
         nro: "FAC-0004",
         servicio: "Televisión por Cable",
         periodo: "2025-08",
@@ -61,7 +61,7 @@ export class FacturaService {
       },
       {
         id: 5,
-        cliente_id: 1,
+        cliente_id: "1f0b4e43-a106-65c4-ae51-e0be035fb029",
         nro: "FAC-0005",
         servicio: "Teléfono Fijo",
         periodo: "2025-09",
@@ -74,7 +74,7 @@ export class FacturaService {
       },
       {
         id: 6,
-        cliente_id: 2,
+        cliente_id: "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
         nro: "FAC-0101",
         servicio: "Internet Hogar",
         periodo: "2025-05",
@@ -87,7 +87,7 @@ export class FacturaService {
       },
       {
         id: 7,
-        cliente_id: 2,
+        cliente_id: "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
         nro: "FAC-0102",
         servicio: "Energía Eléctrica",
         periodo: "2025-06",
@@ -100,7 +100,7 @@ export class FacturaService {
       },
       {
         id: 8,
-        cliente_id: 2,
+        cliente_id: "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
         nro: "FAC-0103",
         servicio: "Agua Potable",
         periodo: "2025-07",
@@ -113,7 +113,7 @@ export class FacturaService {
       },
       {
         id: 9,
-        cliente_id: 2,
+        cliente_id: "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
         nro: "FAC-0104",
         servicio: "Televisión por Cable",
         periodo: "2025-08",
@@ -126,7 +126,7 @@ export class FacturaService {
       },
       {
         id: 10,
-        cliente_id: 2,
+        cliente_id: "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
         nro: "FAC-0105",
         servicio: "Teléfono Fijo",
         periodo: "2025-09",
@@ -143,7 +143,7 @@ export class FacturaService {
   constructor() {
   }
 
-  getFacturasByClienteId(clienteId: number) {
+  getFacturasByClienteId(clienteId: string | null) {
     const allFacturas = this.getDataFactura();
     return allFacturas.filter(factura => factura.cliente_id === clienteId);
   }
