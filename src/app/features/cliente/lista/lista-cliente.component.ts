@@ -12,6 +12,7 @@ import {PaginatorModule} from "primeng/paginator";
 import {MultiSelectModule} from "primeng/multiselect";
 import {InputTextModule} from "primeng/inputtext";
 import {TooltipModule} from "primeng/tooltip";
+import {Router, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-lista-cliente',
@@ -29,7 +30,8 @@ import {TooltipModule} from "primeng/tooltip";
     MultiSelectModule,
     InputTextModule,
     ButtonDirective,
-    TooltipModule
+    TooltipModule,
+    RouterOutlet
   ],
   templateUrl: './lista-cliente.component.html',
   styleUrl: './lista-cliente.component.scss'
@@ -47,7 +49,7 @@ export class ListaClienteComponent implements OnInit {
 
   searchValue: string | undefined;
 
-  constructor(private clienteService: ClienteService) {
+  constructor(private clienteService: ClienteService, private router: Router) {
   }
 
   ngOnInit() {
@@ -80,8 +82,8 @@ export class ListaClienteComponent implements OnInit {
     }
   }
 
-  verFacturas(customer: any) {
-
+  public verFacturas() {
+    this.router.navigate(['/facturas/cliente']);
   }
 
   deleteCustomer(customer: any) {

@@ -1,4 +1,4 @@
-
+<router-outlet></router-outlet>
 <div class="card">
   <p-table
     #dt1
@@ -98,7 +98,7 @@
         <td class="px-2">
           <button pButton type="button" icon="pi pi-file-import" class="p-button-rounded p-button-success mx-1" pTooltip="Ver Facturas"
                   tooltipPosition="top"
-                  (click)="verFacturas(customer)"></button>
+                  (click)="verFacturas()"></button>
           <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" pTooltip="Eliminar"
                   tooltipPosition="top"
                   (click)="deleteCustomer(customer)"></button>
