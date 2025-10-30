@@ -1,1 +1,40 @@
-<p>lista-factura-cliente works!</p>
+<div class="card">
+  <p-table
+    [value]="facturas"
+    styleClass="p-datatable-striped"
+    [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Acciòn</th>
+        <th>Nro.</th>
+        <th>Servicio</th>
+        <th>Periodo</th>
+        <th>Monto</th>
+        <th>Estado</th>
+        <th>Fecha Emision</th>
+        <th>Fecha Pago</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-factura>
+      <tr>
+        <td>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-credit-card"
+            class="p-button-rounded p-button-info p-mr-2" pTooltip="Pagar Factura"
+            tooltipPosition="top"
+            (click)="verDetalle(factura)">
+          </button>
+        </td>
+        <td>{{ factura.nro }}</td>
+        <td>{{ factura.servicio }}</td>
+        <td>{{ factura.periodo }}</td>
+        <td>{{ factura.monto }}</td>
+        <td>{{ factura.estado.valor }}</td>
+        <td>{{ factura.fecha_emision }}</td>
+        <td>{{ factura.fecha_pago ?? 'N/A' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
