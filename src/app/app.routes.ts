@@ -4,5 +4,5 @@ import {ListaClienteComponent} from "./features/cliente/lista/lista-cliente.comp
 
 export const routes: Routes = [
   {path: '', component: ListaClienteComponent},
-  {path: 'facturas/cliente', component: ListaFacturaClienteComponent}
+  {path: 'facturas/cliente/:id', component: ListaFacturaClienteComponent}
 ];

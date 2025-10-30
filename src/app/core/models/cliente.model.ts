@@ -1,21 +1,17 @@
 export interface Cliente {
-  id?: number;
-  name?: string;
-  country?: Country;
-  company?: string;
-  date?: string | Date;
-  status?: string;
-  activity?: number;
-  representative?: Representative;
-  verified?: boolean;
-  balance?: number;
-}
-export interface Country {
-  name?: string;
-  code?: string;
+  id: string;
+  nombre: string;
+  apellido_paterno: string;
+  apellido_materno: string;
+  f_nacimiento: string;
+  tel_celular: string;
+  nro_documento: string;
+  email_personal: string;
+  estado: Estado;
+  activo: boolean;
 }
 
-export interface Representative {
-  name?: string;
-  image?: string;
+export interface Estado {
+  codigo: string;
+  valor: string;
 }

@@ -42,27 +42,7 @@
         <th style="min-width:15rem">
           <div class="flex align-items-center">
             F. Nacimiento
-            <p-columnFilter field="representative" matchMode="in" display="menu" [showMatchModes]="false"
-                            [showOperator]="false" [showAddButton]="false">
-              <ng-template pTemplate="header">
-                <div class="px-3 pt-3 pb-0">
-                  <span class="font-bold">Agent Picker</span>
-                </div>
-              </ng-template>
-              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
-                               (onChange)="filter($event.value)" optionLabel="name">
-                  <ng-template let-option pTemplate="item">
-                    <div class="inline-block vertical-align-middle">
-                      <img [alt]="option.label"
-                           src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ option.image }}" width="24"
-                           class="vertical-align-middle"/>
-                      <span class="ml-1 mt-1">{{ option.name }}</span>
-                    </div>
-                  </ng-template>
-                </p-multiSelect>
-              </ng-template>
-            </p-columnFilter>
+
           </div>
         </th>
         <th style="min-width:10rem">
@@ -96,30 +76,30 @@
     <ng-template pTemplate="body" let-customer>
       <tr>
         <td class="px-2">
-          <button pButton type="button" icon="pi pi-file-import" class="p-button-rounded p-button-success mx-1" pTooltip="Ver Facturas"
+          <button pButton type="button" icon="pi pi-file-import" class="p-button-rounded p-button-success mx-1"
+                  pTooltip="Ver Facturas"
                   tooltipPosition="top"
-                  (click)="verFacturas()"></button>
+                  (click)="verFacturas(customer)"></button>
           <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" pTooltip="Eliminar"
-                  tooltipPosition="top"
-                  (click)="deleteCustomer(customer)"></button>
+                  tooltipPosition="top"></button>
         </td>
         <td>
-          {{ customer.name }}
+          {{ customer.nombre + " " + customer.apellido_paterno + ' ' + customer.apellido_materno }}
         </td>
         <td>
-          {{ customer.name }}
+          {{ customer.nro_documento }}
         </td>
         <td>
-          {{ customer.name }}
+          {{ customer.f_nacimiento  | date: 'MM/dd/yyyy' }}
         </td>
         <td>
-          {{ customer.date | date: 'MM/dd/yyyy' }}
+          {{ customer.email_personal }}
         </td>
         <td>
-          {{ customer.balance | currency: 'USD':'symbol' }}
+          {{ customer.tel_celular }}
         </td>
         <td>
-          <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"/>
+          <p-tag [value]="customer.estado.valor" [severity]="getSeverity(customer.estado.codigo)"/>
         </td>
       </tr>
     </ng-template>
