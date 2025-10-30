@@ -40,7 +40,8 @@ import {ConfirmPopupModule} from "primeng/confirmpopup";
 export class ListaFacturaClienteComponent implements OnInit {
 
   facturas!: Factura[];
-  visible: boolean = false;
+  mostrarModalPago: boolean = false;
+  mostrarModalDetalle: boolean = false;
   position: "top" | undefined;
   formPago: FormGroup = new FormGroup({});
   formValidPago: boolean = false;
@@ -109,17 +110,18 @@ export class ListaFacturaClienteComponent implements OnInit {
   }
 
   verFactura(factura: any) {
-
+    this.facturaSeleccionada = factura;
+    this.mostrarModalDetalle = true;
   }
 
   showDialog(factura: Factura) {
     this.facturaSeleccionada = factura;
     this.position = "top";
-    this.visible = true;
+    this.mostrarModalPago = true;
   }
 
   cerrarForm() {
-    this.visible = false;
+    this.mostrarModalPago = false;
     this.resetForm();
   }
 
@@ -149,5 +151,9 @@ export class ListaFacturaClienteComponent implements OnInit {
         });
       }
     });
+  }
+
+  cerrarModalDetalle() {
+    this.mostrarModalDetalle = false;
   }
 }

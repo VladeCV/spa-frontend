@@ -7,7 +7,6 @@ export class FacturaService {
 
   getDataFactura() {
     return [
-      // 🧍 Client 1 - cliente_id = 1
       {
         id: 1,
         cliente_id: 1,
@@ -18,7 +17,8 @@ export class FacturaService {
         estado: {codigo: "PEN", valor: "PENDIENTE"},
         activo: true,
         fecha_emision: "2025-05-10",
-        fecha_pago: null
+        fecha_pago: null,
+        metodo_pago: null
       },
       {
         id: 2,
@@ -30,7 +30,8 @@ export class FacturaService {
         estado: {codigo: "PAG", valor: "PAGADO"},
         activo: true,
         fecha_emision: "2025-06-10",
-        fecha_pago: "2025-06-15"
+        fecha_pago: "2025-06-15",
+        metodo_pago: "Tarjeta de Crédito"
       },
       {
         id: 3,
@@ -42,7 +43,8 @@ export class FacturaService {
         estado: {codigo: "PEN", valor: "PENDIENTE"},
         activo: true,
         fecha_emision: "2025-07-05",
-        fecha_pago: null
+        fecha_pago: null,
+        metodo_pago: null
       },
       {
         id: 4,
@@ -54,7 +56,8 @@ export class FacturaService {
         estado: {codigo: "PAG", valor: "PAGADO"},
         activo: true,
         fecha_emision: "2025-08-01",
-        fecha_pago: "2025-08-10"
+        fecha_pago: "2025-08-10",
+        metodo_pago: "Transferencia Bancaria"
       },
       {
         id: 5,
@@ -66,10 +69,9 @@ export class FacturaService {
         estado: {codigo: "PEN", valor: "PENDIENTE"},
         activo: true,
         fecha_emision: "2025-09-10",
-        fecha_pago: null
+        fecha_pago: null,
+        metodo_pago: null
       },
-
-      // 🧍 Client 2 - cliente_id = 2
       {
         id: 6,
         cliente_id: 2,
@@ -80,7 +82,8 @@ export class FacturaService {
         estado: {codigo: "PAG", valor: "PAGADO"},
         activo: true,
         fecha_emision: "2025-05-08",
-        fecha_pago: "2025-05-12"
+        fecha_pago: "2025-05-12",
+        metodo_pago: "Efectivo"
       },
       {
         id: 7,
@@ -92,7 +95,8 @@ export class FacturaService {
         estado: {codigo: "PEN", valor: "PENDIENTE"},
         activo: true,
         fecha_emision: "2025-06-10",
-        fecha_pago: null
+        fecha_pago: null,
+        metodo_pago: null
       },
       {
         id: 8,
@@ -104,7 +108,8 @@ export class FacturaService {
         estado: {codigo: "PAG", valor: "PAGADO"},
         activo: true,
         fecha_emision: "2025-07-03",
-        fecha_pago: "2025-07-07"
+        fecha_pago: "2025-07-07",
+        metodo_pago: "PayPal"
       },
       {
         id: 9,
@@ -116,7 +121,8 @@ export class FacturaService {
         estado: {codigo: "PEN", valor: "PENDIENTE"},
         activo: true,
         fecha_emision: "2025-08-01",
-        fecha_pago: null
+        fecha_pago: null,
+        metodo_pago: null
       },
       {
         id: 10,
@@ -128,7 +134,8 @@ export class FacturaService {
         estado: {codigo: "PAG", valor: "PAGADO"},
         activo: true,
         fecha_emision: "2025-09-05",
-        fecha_pago: "2025-09-08"
+        fecha_pago: "2025-09-08",
+        metodo_pago: "Tarjeta de Débito"
       }
     ];
   }

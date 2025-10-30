@@ -14,4 +14,5 @@ export interface Factura {
   activo: boolean;
   fecha_emision: string;
   fecha_pago?: string | null;
+  metodo_pago?: string | null;
 }

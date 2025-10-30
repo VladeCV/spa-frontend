@@ -16,6 +16,7 @@
         <th>Estado</th>
         <th>Fecha Emision</th>
         <th>Fecha Pago</th>
+        <th>Metodo de pago</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-factura>
@@ -40,6 +41,7 @@
         <td>{{ factura.estado.valor }}</td>
         <td>{{ factura.fecha_emision }}</td>
         <td>{{ factura.fecha_pago ?? 'N/A' }}</td>
+        <td>{{ factura.metodo_pago ?? 'N/A' }}</td>
       </tr>
     </ng-template>
   </p-table>
@@ -51,48 +53,87 @@
 <p-dialog
   header="Pagar factura"
   [modal]="true"
-  [(visible)]="visible"
+  [(visible)]="mostrarModalPago"
   [position]="'top'"
   [style]="{ width: '35rem' }"
   appendTo="body">
-
-
-    <div class="p-fluid grid form-gen mt-2">
-      <div class="field sm:col-12 lg:col-6">
-        <label>Nro Factura</label>
-        <input pInputText [value]="facturaSeleccionada?.nro" readonly />
-      </div>
-
-      <div class="field sm:col-12 lg:col-6">
-        <label>Servicio</label>
-        <input pInputText [value]="facturaSeleccionada?.servicio" readonly />
-      </div>
-
-      <div class="field sm:col-12 lg:col-6">
-        <label>Monto</label>
-        <input pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly />
-      </div>
-
-      <div class="field sm:col-12 lg:col-6">
-        <label>Fecha Emisión</label>
-        <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly />
-      </div>
-
-      <div class="field col-12">
-        <label>Método de pago</label>
-        <p-dropdown
-          [options]="metodosPago"
-          placeholder="Seleccione un método"
-          appendTo="body"
-
-        >
-        </p-dropdown>
-      </div>
+  <div class="p-fluid grid form-gen mt-2">
+    <div class="field sm:col-12 lg:col-6">
+      <label>Nro Factura</label>
+      <input pInputText [value]="facturaSeleccionada?.nro" readonly/>
     </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Servicio</label>
+      <input pInputText [value]="facturaSeleccionada?.servicio" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Monto</label>
+      <input pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Fecha Emisión</label>
+      <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly/>
+    </div>
+
+    <div class="field col-12">
+      <label>Método de pago</label>
+      <p-dropdown
+        [options]="metodosPago"
+        placeholder="Seleccione un método"
+        appendTo="body"
+
+      >
+      </p-dropdown>
+    </div>
+  </div>
   <div class="flex justify-content-end gap-2">
     <p-button label="Cancelar" severity="secondary" (click)="cerrarForm()"/>
     <p-button label="Pagar" (click)="pagarFactura($event)"/>
   </div>
 </p-dialog>
 
+<p-dialog
+  header="Datos factura"
+  [modal]="true"
+  [(visible)]="mostrarModalDetalle"
+  [position]="'top'"
+  [style]="{ width: '35rem' }"
+  appendTo="body">
+  <div class="p-fluid grid form-gen mt-2">
+    <div class="field sm:col-12 lg:col-6">
+      <label>Nro Factura</label>
+      <input pInputText [value]="facturaSeleccionada?.nro" readonly/>
+    </div>
 
+    <div class="field sm:col-12 lg:col-6">
+      <label>Servicio</label>
+      <input pInputText [value]="facturaSeleccionada?.servicio" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Monto</label>
+      <input pInputText [value]="facturaSeleccionada?.monto | currency:'USD'" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Fecha Emisión</label>
+      <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Fecha Emisión</label>
+      <input pInputText [value]="facturaSeleccionada?.fecha_emision" readonly/>
+    </div>
+
+    <div class="field sm:col-12 lg:col-6">
+      <label>Método de pago</label>
+      <input pInputText [value]="facturaSeleccionada?.metodo_pago" readonly/>
+    </div>
+  </div>
+  <div class="flex justify-content-end gap-2">
+    <p-button label="Cerrar" severity="secondary" (click)="cerrarModalDetalle()"/>
+  </div>
+</p-dialog>
