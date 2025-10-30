@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Factura} from "../../../core/models/factura.model";
 import {FacturaService} from "../../../core/services/factura.service";
 import {TableModule} from "primeng/table";
-import {ButtonDirective} from "primeng/button";
+import {Button, ButtonDirective} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-lista-factura-cliente',
@@ -11,7 +12,8 @@ import {TooltipModule} from "primeng/tooltip";
   imports: [
     TableModule,
     ButtonDirective,
-    TooltipModule
+    TooltipModule,
+    Button
   ],
   templateUrl: './lista-factura-cliente.component.html',
   styleUrl: './lista-factura-cliente.component.scss'
@@ -21,7 +23,7 @@ export class ListaFacturaClienteComponent implements OnInit {
   facturas!: Factura[];
 
 
-  constructor(private facturaService: FacturaService) {
+  constructor(private facturaService: FacturaService, private location: Location) {
   }
 
   ngOnInit() {
@@ -36,5 +38,10 @@ export class ListaFacturaClienteComponent implements OnInit {
 
   verDetalle(factura: any) {
 
+  }
+
+  volver() {
+
+    this.location.back();
   }
 }
