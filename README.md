@@ -1,27 +1,55 @@
 # SapFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Ejecutar `ng serve` para dev server. Navegar a `http://localhost:4200/`. 
 
-## Code scaffolding
+## Para cargar los datos instalar JSON SERVER
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecutar `npm install -g json-server` 
 
-## Build
+## Para levantar el JSON SERVER
+Ejecutar `npx json-server --watch db.json --port 3000` 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## API Reference
 
-## Running unit tests
+#### Lista de clientes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```http
+  GET /clientes
+```
+#### Obtener cliente por nro de documento
 
-## Running end-to-end tests
+```http
+  GET /clientes?nro_documento={valor}
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `valor`      | `string` | **Requerido**. Nro. de documento del cliente |
 
-## Further help
+#### Lista de facturas
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```http
+  GET /facturas
+
+```
+#### Obtener facturas por id cliente
+```http
+  GET /facturas?cliente_id={valor}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `valor`      | `string` | **Requerido**. Id cliente |
+
+#### Pagar factura
+```http
+  PATCH /facturas/{id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Requerido**. Id factura |
