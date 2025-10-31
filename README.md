@@ -22,8 +22,7 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
 1. Clonar el repositorio:
 
 ```bash
-git clone <url-del-repositorio>
-cd <nombre-del-proyecto>
+git clone https://github.com/VladeCV/spa-frontend.git
 ```
 2. Instalar dependencias de Angular:
 
