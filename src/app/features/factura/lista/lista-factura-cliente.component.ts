@@ -52,6 +52,7 @@ export class ListaFacturaClienteComponent implements OnInit {
   position: "top" | undefined;
   formPago: FormGroup = new FormGroup({});
   formValidPago: boolean = false;
+  id_cliente: string | null = '';
   facturaSeleccionada!: Factura;
   metodosPago: any[] = [
     {codigo: 'TC', valor: 'Tarjeta de Crédito'},
@@ -70,8 +71,8 @@ export class ListaFacturaClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-    let id_cliente: string | null = this._activatedRoute.snapshot.paramMap.get("id");
-    this.facturas = this.getFacturasByClienteId(id_cliente);
+    this.id_cliente  = this._activatedRoute.snapshot.paramMap.get("id");
+    this.facturas = this.getFacturasByClienteId(this.id_cliente);
   }
 
   // @ts-ignore
@@ -144,6 +145,13 @@ export class ListaFacturaClienteComponent implements OnInit {
     this.facturaSeleccionada = factura;
     this.position = "top";
     this.mostrarModalPago = true;
+    this.formPago.setValue({
+      nro: this.facturaSeleccionada.nro,
+      servicio: this.facturaSeleccionada.servicio,
+      monto: this.facturaSeleccionada.monto,
+      f_emision: this.facturaSeleccionada.fecha_emision,
+      metodo_pago: ''
+    })
   }
 
   cerrarForm() {
@@ -198,5 +206,10 @@ export class ListaFacturaClienteComponent implements OnInit {
 
   cerrarModalDetalle() {
     this.mostrarModalDetalle = false;
+  }
+
+  cerrarModalConfirmacion() {
+    this.mostrarModalConfirmacion = false;
+    this.getFacturasByClienteId(this.id_cliente);
   }
 }
