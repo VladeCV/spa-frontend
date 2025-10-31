@@ -76,18 +76,19 @@ export class ListaFacturaClienteComponent implements OnInit {
     this.facturas = this.getFacturasByClienteId(id_cliente);
 
     if (this.facturas.length === 0) {
-      this.messageService.add({
-        severity: 'info',
-        summary: 'No hay facturas',
-        detail: 'El cliente seleccionado no tiene facturas asociadas.'
-      });
+      console.log('tamaño',this.facturas.length);
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Cliente encontrado.' });
     }
 
   }
 
   public getFacturasByClienteId(clienteId: string | null): Factura[] {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Cargando',
+      detail: 'Obteniendo facturas para el cliente...'
+    })
     return this.facturaService.getFacturasByClienteId(clienteId);
-
   }
 
   initForm() {

@@ -53,4 +53,10 @@ export class ClienteService {
     return Promise.resolve(this.getData());
   }
 
+  getClienteByNroDocumento(nroDocumento: string) {
+    const clientes = this.getData();
+    const cliente = clientes.find(c => c.nro_documento === nroDocumento);
+    return Promise.resolve(cliente);
+  }
+
 }
