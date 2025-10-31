@@ -3,6 +3,11 @@ export interface Estado {
   valor: string;
 }
 
+export interface MetodoPago {
+  codigo: string;
+  valor: string;
+}
+
 export interface Factura {
   id: number;
   cliente_id: string;
@@ -14,5 +19,5 @@ export interface Factura {
   activo: boolean;
   fecha_emision: string;
   fecha_pago?: string | null;
-  metodo_pago?: string | null;
+  metodo_pago: MetodoPago | null;
 }
