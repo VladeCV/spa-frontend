@@ -48,7 +48,7 @@ export class ListaClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCustomersLarge();
+    this.getClientes();
 
   }
 
@@ -84,6 +84,13 @@ export class ListaClienteComponent implements OnInit {
   public getCustomersLarge() {
     this.clienteService.getClientes().then((customers) => {
       this.customers = customers;
+      this.loading = false;
+    });
+  }
+
+  public getClientes() {
+    this.clienteService.getClientesAPI().subscribe((data) => {
+      this.customers = data;
       this.loading = false;
     });
   }

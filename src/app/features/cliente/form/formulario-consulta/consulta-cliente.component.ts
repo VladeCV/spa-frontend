@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ButtonDirective} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {Ripple} from "primeng/ripple";
-import {ConfirmationService, MessageService} from "primeng/api";
+import {MessageService} from "primeng/api";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ClienteService} from "../../../../core/services/cliente.service";
@@ -22,8 +22,7 @@ import {ToastModule} from "primeng/toast";
     ToastModule
   ],
   templateUrl: './consulta-cliente.component.html',
-  styleUrl: './consulta-cliente.component.scss',
-  providers: [MessageService,ConfirmationService]
+  styleUrl: './consulta-cliente.component.scss'
 })
 export class ConsultaClienteComponent {
   loginForm: FormGroup = new FormGroup({});
@@ -83,6 +82,32 @@ export class ConsultaClienteComponent {
     } catch (err) {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al buscar cliente.' });
     }
+  }
+
+  ingresarAPI() {
+    if (!this.validFormConsulta()) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Formulario inválido.' });
+      return;
+    }
+    const datos = this.loginForm.value;
+    this.clienteService.getClientesByNroDocumentoAPI(datos.nro).subscribe({
+      next: (dataCliente: any) => {
+        console.log(dataCliente);
+        const cliente = Array.isArray(dataCliente) ? dataCliente[0] : dataCliente;
+        if (cliente) {
+          this.cliente = cliente;
+          this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Cliente encontrado.' });
+          // @ts-ignore
+          this.router.navigate(['/facturas/cliente/', this.cliente.id]);
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Datos incorrectos' });
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al buscar cliente.' });
+      }
+    });
   }
 
 }

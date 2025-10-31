@@ -41,8 +41,7 @@ import {ActivatedRoute} from "@angular/router";
     FieldsetModule
   ],
   templateUrl: './lista-factura-cliente.component.html',
-  styleUrl: './lista-factura-cliente.component.scss',
-  providers: [ConfirmationService, MessageService]
+  styleUrl: './lista-factura-cliente.component.scss'
 })
 export class ListaFacturaClienteComponent implements OnInit {
 
@@ -53,12 +52,12 @@ export class ListaFacturaClienteComponent implements OnInit {
   position: "top" | undefined;
   formPago: FormGroup = new FormGroup({});
   formValidPago: boolean = false;
-  facturaSeleccionada: Factura | null = null;
+  facturaSeleccionada!: Factura;
   metodosPago: any[] = [
-    {label: 'Tarjeta de Crédito', value: 'tarjeta_credito'},
-    {label: 'Transferencia Bancaria', value: 'transferencia_bancaria'},
-    {label: 'PayPal', value: 'paypal'},
-    {label: 'Efectivo', value: 'efectivo'}
+    {codigo: 'TC', valor: 'Tarjeta de Crédito'},
+    {codigo: 'TB', valor: 'Transferencia Bancaria'},
+    {codigo: 'PP', valor: 'PayPal'},
+    {codigo: 'EF', valor: 'Efectivo'}
   ];
 
   constructor(private facturaService: FacturaService,
@@ -72,23 +71,38 @@ export class ListaFacturaClienteComponent implements OnInit {
 
   ngOnInit() {
     let id_cliente: string | null = this._activatedRoute.snapshot.paramMap.get("id");
-
     this.facturas = this.getFacturasByClienteId(id_cliente);
-
-    if (this.facturas.length === 0) {
-      console.log('tamaño',this.facturas.length);
-      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Cliente encontrado.' });
-    }
-
   }
 
+  // @ts-ignore
   public getFacturasByClienteId(clienteId: string | null): Factura[] {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Cargando',
-      detail: 'Obteniendo facturas para el cliente...'
-    })
-    return this.facturaService.getFacturasByClienteId(clienteId);
+    this.facturaService.getFacturasByClienteIdAPI(clienteId).subscribe({
+      next: (data) => {
+        if (data.length > 0) {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Éxito',
+            detail: 'Facturas obtenidas correctamente.'
+          });
+          this.facturas = data;
+          return data;
+        } else {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Información',
+            detail: 'No se encontraron facturas para este cliente.'
+          });
+          return [];
+        }
+      },
+      error: (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Error al obtener las facturas.'
+        });
+      }
+    });
   }
 
   initForm() {
@@ -137,30 +151,33 @@ export class ListaFacturaClienteComponent implements OnInit {
     this.resetForm();
   }
 
-  pagarFactura(event: { target: any }) {
+  pagarFacturaAPI(event: { target: any }) {
     if (this.validFormPago()) {
       const dataSend = {
         id: this.facturaSeleccionada?.id,
         metodo_pago: this.formPago.get('metodo_pago')!.value
       }
+      console.log('DATA', dataSend);
       this.confirmationService.confirm({
         message: '¿Está seguro que desea pagar esta factura?',
         header: 'Confirmar Pago',
         icon: 'pi pi-exclamation-triangle',
         target: event.target,
         accept: () => {
-          const facturaPagada = this.facturaService.pagarFactura(dataSend);
-          console.log(facturaPagada);
-          if (facturaPagada) {
-            this.facturaSeleccionada = facturaPagada;
-            this.cerrarForm();
-            this.mostrarModalConfirmacion = true;
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Pago Exitoso',
-              detail: `La factura ha sido pagada correctamente.`
-            });
-          }
+          this.facturaService.pagarFacturaAPI(dataSend).subscribe({
+            next: (facturaPagada) => {
+              this.facturaSeleccionada = facturaPagada;
+              this.cerrarForm();
+              this.mostrarModalConfirmacion = true;
+            },
+            error: (error) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Error al procesar el pago de la factura.'
+              });
+            }
+          });
         },
         reject: () => {
           this.messageService.add({
@@ -177,7 +194,6 @@ export class ListaFacturaClienteComponent implements OnInit {
         detail: 'Por favor, complete todos los campos requeridos.'
       });
     }
-
   }
 
   cerrarModalDetalle() {

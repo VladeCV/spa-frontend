@@ -46,7 +46,7 @@
         <td>{{ factura.estado.valor }}</td>
         <td>{{ factura.fecha_emision }}</td>
         <td>{{ factura.fecha_pago ?? 'N/A' }}</td>
-        <td>{{ factura.metodo_pago ?? 'N/A' }}</td>
+        <td>{{ factura.metodo_pago.valor ?? 'N/A' }}</td>
       </tr>
     </ng-template>
   </p-table>
@@ -90,7 +90,7 @@
           </tr>
           <tr>
             <td><strong>Método de Pago</strong></td>
-            <td>{{ facturaSeleccionada?.metodo_pago }}</td>
+            <td>{{ facturaSeleccionada?.metodo_pago?.valor }}</td>
           </tr>
         </table>
       </div>
@@ -136,7 +136,7 @@
         <label>Método de pago</label>
         <p-dropdown
           [options]="metodosPago"
-          optionLabel="label"
+          optionLabel="valor"
           placeholder="Seleccione un método"
           appendTo="body"
           formControlName="metodo_pago"
@@ -147,7 +147,7 @@
   </form>
   <div class="flex justify-content-end gap-2">
     <p-button label="Cancelar" severity="secondary" (click)="cerrarForm()"/>
-    <p-button label="Pagar" (click)="pagarFactura($event)"/>
+    <p-button label="Pagar" (click)="pagarFacturaAPI($event)"/>
   </div>
 </p-dialog>
 
@@ -186,7 +186,7 @@
 
     <div class="field sm:col-12 lg:col-6">
       <label>Método de pago</label>
-      <input pInputText [value]="facturaSeleccionada?.metodo_pago" readonly/>
+      <input pInputText [value]="facturaSeleccionada?.metodo_pago?.valor" readonly/>
     </div>
   </div>
   <div class="flex justify-content-end gap-2">
