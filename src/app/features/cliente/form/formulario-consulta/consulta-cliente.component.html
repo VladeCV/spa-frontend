@@ -11,13 +11,12 @@
 
     <form [formGroup]="loginForm">
       <div>
-        <label for="email" class="block text-900 font-medium mb-2">Numero de documento</label>
+        <label for="email" class="block text-900 font-medium mb-2">Número de documento</label>
         <input id="email" type="text" pInputText class="w-full mb-3" formControlName="nro">
-
-        <button pButton pRipple icon="pi pi-sign-in" class="w-full" label="Ingresar"
-                (click)="ingresar()"></button>
       </div>
     </form>
+    <button pButton pRipple icon="pi pi-sign-in" class="w-full" label="Ingresar"
+            (click)="ingresar()"></button>
   </div>
 </div>
 <p-toast></p-toast>

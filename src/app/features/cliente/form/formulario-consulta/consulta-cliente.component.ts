@@ -69,7 +69,6 @@ export class ConsultaClienteComponent {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Formulario inválido.' });
       return;
     }
-
     const datos = this.loginForm.value;
     try {
       const dataCliente = await this.clienteService.getClienteByNroDocumento(datos.nro);
