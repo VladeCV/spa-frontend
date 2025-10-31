@@ -1,4 +1,7 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {Factura} from "../models/factura.model";
 
 @Injectable({
   providedIn: 'root'
@@ -140,12 +143,27 @@ export class FacturaService {
     ];
   }
 
-  constructor() {
+  private apiUrl = 'http://localhost:3000/facturas';
+
+  constructor(private http: HttpClient) {
+  }
+
+  getFacturasByClienteIdAPI(clienteId: string | null): Observable<Factura[]> {
+    return this.http.get<any[]>(`${this.apiUrl}` + `?cliente_id=${clienteId}`);
   }
 
   getFacturasByClienteId(clienteId: string | null) {
     const allFacturas = this.getDataFactura();
     return allFacturas.filter(factura => factura.cliente_id === clienteId);
+  }
+
+  pagarFacturaAPI(data: any): Observable<Factura> {
+    const update = {
+      estado: { codigo: 'PAG', valor: 'PAGADO' },
+      fecha_pago: new Date().toISOString().split('T')[0],
+      metodo_pago: {codigo: data.metodo_pago.codigo, valor: data.metodo_pago.valor }
+    };
+    return this.http.patch<Factura>(`${this.apiUrl}/${data.id}`, update);
   }
 
   pagarFactura(data: any) {
@@ -154,7 +172,8 @@ export class FacturaService {
     if (factura && factura.estado.codigo === "PEN") {
       factura.estado = {codigo: "PAG", valor: "PAGADO"};
       factura.fecha_pago = new Date().toISOString().split('T')[0];
-      factura.metodo_pago = data.metodo_pago.label;
+      // @ts-ignore
+      factura.metodo_pago = {codigo: data.metodo_pago.codigo, valor: data.metodo_pago.valor };
     }
     return factura;
   }
