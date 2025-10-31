@@ -9,7 +9,10 @@
       "tel_celular": "+59171234567",
       "nro_documento": "7851234",
       "email_personal": "maria.gonzales@example.com",
-      "estado": { "codigo": "ACT", "valor": "Activo" },
+      "estado": {
+        "codigo": "ACT",
+        "valor": "Activo"
+      },
       "activo": true
     },
     {
@@ -21,50 +24,411 @@
       "tel_celular": "+59176451234",
       "nro_documento": "9238745",
       "email_personal": "carlos.rojas@example.com",
-      "estado": { "codigo": "ACT", "valor": "Activo" },
+      "estado": {
+        "codigo": "ACT",
+        "valor": "Activo"
+      },
+      "activo": true
+    },
+    {
+      "id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nombre": "Laura",
+      "apellido_paterno": "Suarez",
+      "apellido_materno": "Martinez",
+      "f_nacimiento": "1990-02-14",
+      "tel_celular": "+59170123456",
+      "nro_documento": "11223344",
+      "email_personal": "laura.suarez@example.com",
+      "estado": {
+        "codigo": "ACT",
+        "valor": "Activo"
+      },
+      "activo": true
+    },
+    {
+      "id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nombre": "Miguel",
+      "apellido_paterno": "Paredes",
+      "apellido_materno": "Cortez",
+      "f_nacimiento": "1985-07-09",
+      "tel_celular": "+59170234567",
+      "nro_documento": "22334455",
+      "email_personal": "miguel.paredes@example.com",
+      "estado": {
+        "codigo": "ACT",
+        "valor": "Activo"
+      },
+      "activo": true
+    },
+    {
+      "id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nombre": "Sofía",
+      "apellido_paterno": "Vargas",
+      "apellido_materno": "Lopez",
+      "f_nacimiento": "1992-11-20",
+      "tel_celular": "+59170345678",
+      "nro_documento": "33445566",
+      "email_personal": "sofia.vargas@example.com",
+      "estado": {
+        "codigo": "ACT",
+        "valor": "Activo"
+      },
       "activo": true
     }
   ],
-
   "facturas": [
     {
-      "id": 1,
+      "id": "1",
       "cliente_id": "1f0b4e43-a106-65c4-ae51-e0be035fb029",
       "nro": "FAC-0001",
       "servicio": "Agua Potable",
       "periodo": "2025-05",
       "monto": 48.75,
-      "estado": { "codigo": "PEN", "valor": "PENDIENTE" },
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-05-10",
+      "fecha_pago": "2025-10-31",
+      "metodo_pago": {
+        "codigo": "PP",
+        "valor": "PayPal"
+      }
+    },
+    {
+      "id": "2",
+      "cliente_id": "1f0b4e43-a106-65c4-ae51-e0be035fb029",
+      "nro": "FAC-0002",
+      "servicio": "Energía Eléctrica",
+      "periodo": "2025-06",
+      "monto": 125.5,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-06-10",
+      "fecha_pago": "2025-06-15",
+      "metodo_pago": {
+        "codigo": "TC",
+        "valor": "Tarjeta de Crédito"
+      }
+    },
+    {
+      "id": "3",
+      "cliente_id": "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
+      "nro": "FAC-0102",
+      "servicio": "Energía Eléctrica",
+      "periodo": "2025-06",
+      "monto": 142.8,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-06-10",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "4",
+      "cliente_id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nro": "FAC-0201",
+      "servicio": "Agua Potable",
+      "periodo": "2025-01",
+      "monto": 45,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-01-10",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "5",
+      "cliente_id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nro": "FAC-0202",
+      "servicio": "Energía Eléctrica",
+      "periodo": "2025-02",
+      "monto": 120.5,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-02-10",
+      "fecha_pago": "2025-02-15",
+      "metodo_pago": {
+        "codigo": "TC",
+        "valor": "Tarjeta de Crédito"
+      }
+    },
+    {
+      "id": "6",
+      "cliente_id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nro": "FAC-0203",
+      "servicio": "Internet Hogar",
+      "periodo": "2025-03",
+      "monto": 200,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-03-05",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "7",
+      "cliente_id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nro": "FAC-0204",
+      "servicio": "Televisión por Cable",
+      "periodo": "2025-04",
+      "monto": 85,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-04-01",
+      "fecha_pago": "2025-04-07",
+      "metodo_pago": {
+        "codigo": "PP",
+        "valor": "PayPal"
+      }
+    },
+    {
+      "id": "8",
+      "cliente_id": "1f0b4e50-a111-1111-bc8e-e0be035fb029",
+      "nro": "FAC-0205",
+      "servicio": "Teléfono Fijo",
+      "periodo": "2025-05",
+      "monto": 35.25,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
       "activo": true,
       "fecha_emision": "2025-05-10",
       "fecha_pago": null,
       "metodo_pago": null
     },
     {
-      "id": 2,
-      "cliente_id": "1f0b4e43-a106-65c4-ae51-e0be035fb029",
-      "nro": "FAC-0002",
-      "servicio": "Energía Eléctrica",
-      "periodo": "2025-06",
-      "monto": 125.5,
-      "estado": { "codigo": "PAG", "valor": "PAGADO" },
+      "id": "9",
+      "cliente_id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nro": "FAC-0301",
+      "servicio": "Agua Potable",
+      "periodo": "2025-01",
+      "monto": 50,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
       "activo": true,
-      "fecha_emision": "2025-06-10",
-      "fecha_pago": "2025-06-15",
-      "metodo_pago": "Tarjeta de Crédito"
-    },
-    {
-      "id": 3,
-      "cliente_id": "1f0b4e4f-b292-6188-bc8e-e0be035fb029",
-      "nro": "FAC-0102",
-      "servicio": "Energía Eléctrica",
-      "periodo": "2025-06",
-      "monto": 142.8,
-      "estado": { "codigo": "PEN", "valor": "PENDIENTE" },
-      "activo": true,
-      "fecha_emision": "2025-06-10",
+      "fecha_emision": "2025-01-05",
       "fecha_pago": null,
       "metodo_pago": null
+    },
+    {
+      "id": "10",
+      "cliente_id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nro": "FAC-0302",
+      "servicio": "Energía Eléctrica",
+      "periodo": "2025-02",
+      "monto": 130.5,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-02-10",
+      "fecha_pago": "2025-02-15",
+      "metodo_pago": {
+        "codigo": "TB",
+        "valor": "Transferencia Bancaria"
+      }
+    },
+    {
+      "id": "11",
+      "cliente_id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nro": "FAC-0303",
+      "servicio": "Internet Hogar",
+      "periodo": "2025-03",
+      "monto": 210,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-03-05",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "12",
+      "cliente_id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nro": "FAC-0304",
+      "servicio": "Televisión por Cable",
+      "periodo": "2025-04",
+      "monto": 90,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-04-02",
+      "fecha_pago": "2025-04-06",
+      "metodo_pago": {
+        "codigo": "PP",
+        "valor": "PayPal"
+      }
+    },
+    {
+      "id": "13",
+      "cliente_id": "1f0b4e51-a222-2222-bc8e-e0be035fb029",
+      "nro": "FAC-0305",
+      "servicio": "Teléfono Fijo",
+      "periodo": "2025-05",
+      "monto": 40,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-05-10",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "14",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0401",
+      "servicio": "Agua Potable",
+      "periodo": "2025-01",
+      "monto": 48,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-01-10",
+      "fecha_pago": "2025-01-15",
+      "metodo_pago": {
+        "codigo": "TC",
+        "valor": "Tarjeta de Crédito"
+      }
+    },
+    {
+      "id": "15",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0402",
+      "servicio": "Energía Eléctrica",
+      "periodo": "2025-02",
+      "monto": 135,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-02-10",
+      "fecha_pago": "2025-10-31",
+      "metodo_pago": {
+        "codigo": "TB",
+        "valor": "Transferencia Bancaria"
+      }
+    },
+    {
+      "id": "16",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0403",
+      "servicio": "Internet Hogar",
+      "periodo": "2025-03",
+      "monto": 210,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-03-05",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "17",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0404",
+      "servicio": "Televisión por Cable",
+      "periodo": "2025-04",
+      "monto": 88,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-04-02",
+      "fecha_pago": "2025-04-06",
+      "metodo_pago": {
+        "codigo": "PP",
+        "valor": "PayPal"
+      }
+    },
+    {
+      "id": "18",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0405",
+      "servicio": "Teléfono Fijo",
+      "periodo": "2025-05",
+      "monto": 34.25,
+      "estado": {
+        "codigo": "PEN",
+        "valor": "PENDIENTE"
+      },
+      "activo": true,
+      "fecha_emision": "2025-05-10",
+      "fecha_pago": null,
+      "metodo_pago": null
+    },
+    {
+      "id": "19",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0489",
+      "servicio": "Teléfono Fijo",
+      "periodo": "2025-03",
+      "monto": 96.25,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-05-10",
+      "fecha_pago": "2025-10-31",
+      "metodo_pago": {
+        "codigo": "EF",
+        "valor": "Efectivo"
+      }
+    },
+    {
+      "id": "20",
+      "cliente_id": "1f0b4e52-a333-3333-bc8e-e0be035fb029",
+      "nro": "FAC-0489",
+      "servicio": "Teléfono Fijo",
+      "periodo": "2025-03",
+      "monto": 96.25,
+      "estado": {
+        "codigo": "PAG",
+        "valor": "PAGADO"
+      },
+      "activo": true,
+      "fecha_emision": "2025-05-10",
+      "fecha_pago": "2025-10-31",
+      "metodo_pago": {
+        "codigo": "PP",
+        "valor": "PayPal"
+      }
     }
   ]
 }
